@@ -1,0 +1,96 @@
+<resources>
+
+    <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
+
+    </style>
+
+    <style name="MyMaterialTheme.Base" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--font styles-->
+    <style name="base">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:typeface">monospace</item>
+    </style>
+
+    <style name="base_bold" parent="base">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="base_center" parent="base_bold">
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="input">
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+    </style>
+
+    <style name="hint">
+        <item name="android:textColor">#739cc9</item>
+        <item name="android:textSize">15sp</item>
+
+    </style>
+
+    <style name="tiny" parent="base_center">
+        <item name="android:textSize">10dp</item>
+    </style>
+
+    <style name="welcome" parent="base_center">
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="subTitle" parent="base_center">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="button" parent="subTitle">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <style name="norm_text" parent="base">
+        <item name="android:textColor">@color/colorSecondaryText</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+    <!--new font styles-->
+    <style name="regular_base">
+        <item name="android:fontFamily">"sans-serif"</item>
+    </style>
+    <style name="medium_base">
+        <item name="android:fontFamily">"sans-serif"</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Body1" parent="regular_base">
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="Subheading" parent="regular_base">
+        <item name="android:textSize">17sp</item>
+    </style>
+    <style name="Headline" parent="regular_base">
+        <item name="android:textSize">24sp</item>
+    </style>
+    <style name="Display1" parent="regular_base">
+        <item name="android:textSize">34sp</item>
+    </style>
+    <style name="Body2" parent="medium_base">
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="Button1" parent="medium_base">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+
+    <!---->
+    <style name="NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>
