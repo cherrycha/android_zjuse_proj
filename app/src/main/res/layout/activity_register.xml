@@ -44,27 +44,30 @@
                 android:gravity="center_vertical"
                 style="@style/input">
                 <EditText
+                    android:id="@+id/username_etx"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/user_name"/>
+
                 <EditText
+                    android:id="@+id/phone_etx"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
                     android:hint="@string/phone_no"/>
                 <EditText
+                    android:id="@+id/email_etx"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"/>
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/user_name"/>
-                <EditText
+                    android:id="@+id/password_etx"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/password"/>
                 <Button
+                    android:id="@+id/register_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/register"

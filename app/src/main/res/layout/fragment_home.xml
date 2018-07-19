@@ -50,11 +50,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
                     style="@style/norm_text"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/nick_name"
-                    style="@style/norm_text"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

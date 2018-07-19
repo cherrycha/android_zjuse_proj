@@ -1,5 +1,7 @@
 package activity;
 
+import android.content.Intent;
+import android.os.Trace;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,29 +12,51 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+
 
 import com.example.cherrycha.material_design.R;
 
+import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+
+public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener, View.OnClickListener {
 
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
 
+    EditText username,password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        username = (EditText) findViewById(R.id.username_etx);
+        password = (EditText) findViewById(R.id.password_etx);
+        findViewById(R.id.login_button).setOnClickListener(this);
+        findViewById(R.id.register_button).setOnClickListener(this);
 
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        drawerFragment = (FragmentDrawer)
-                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
-        drawerFragment.setDrawerListener(this);
+//        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+//
+//        setSupportActionBar(mToolbar);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//
+//        drawerFragment = (FragmentDrawer)
+//                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+//        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
+//        drawerFragment.setDrawerListener(this);
     }
 
 
@@ -96,5 +120,46 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             // set the toolbar title
             getSupportActionBar().setTitle(title);
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.login_button:
+                if(HttpPost())
+                    startActivity(new Intent(this,ModelActivity.class));
+                break;
+            case R.id.register_button:
+                startActivity(new Intent(this,Register.class));
+                break;
+        }
+    }
+
+    public boolean HttpPost() {
+        String url = "http://120.79.132.224:9090/shopkeeper/user/token";
+
+        OkHttpClient client = new OkHttpClient();
+        RequestBody formBody = new FormBody.Builder().add("account", "admin")
+                .add("password","hello")
+                .add("method","0")
+                .build(); // 表单键值对
+        Request request = new Request.Builder().url(url).post(formBody).build(); // 请求
+
+        final JSONObject responseobj;
+        client.newCall(request).enqueue(new Callback() { // 回调
+
+            public void onResponse(Call call, Response response) throws IOException {
+                // 请求成功调用，该回调在子线程
+                System.out.println(response.body().string());
+                responseobj=new JSONObject(response.body().string());
+            }
+
+            public void onFailure(Call call, IOException e) {
+                // 请求失败调用
+                System.out.println(e.getMessage());
+            }
+        });
+
+        return false;
     }
 }
