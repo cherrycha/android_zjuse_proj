@@ -2,6 +2,7 @@ package activity;
 
 import android.content.Intent;
 import android.os.Trace;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 
 import com.example.cherrycha.material_design.R;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -126,8 +128,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.login_button:
-                if(HttpPost())
-                    startActivity(new Intent(this,ModelActivity.class));
+                HttpPost();
                 break;
             case R.id.register_button:
                 startActivity(new Intent(this,Register.class));
@@ -135,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         }
     }
 
-    public boolean HttpPost() {
+    public void HttpPost() {
         String url = "http://120.79.132.224:9090/shopkeeper/user/token";
 
         OkHttpClient client = new OkHttpClient();
@@ -145,13 +146,30 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 .build(); // 表单键值对
         Request request = new Request.Builder().url(url).post(formBody).build(); // 请求
 
-        final JSONObject responseobj;
         client.newCall(request).enqueue(new Callback() { // 回调
 
             public void onResponse(Call call, Response response) throws IOException {
                 // 请求成功调用，该回调在子线程
-                System.out.println(response.body().string());
-                responseobj=new JSONObject(response.body().string());
+                try {
+                    String result = new String(response.body().string());
+                    System.out.println(result);
+                    JSONObject responseobj=new JSONObject(result);
+                    JSONObject user = responseobj.getJSONObject("userInfo");//通过user字段获取其所包含的JSONObject对象
+
+                    String name = user.getString("username");
+                    Integer phone = user.getInt("phoneNumber");
+                    String nickname = user.getString("nickname");
+                    String token = user.getString("token");
+
+                    Intent intent = new Intent(MainActivity.this,ModelActivity.class);
+                    intent.putExtra("username", name);//传递数据
+                    intent.putExtra("phone", phone);//传递数据
+                    intent.putExtra("nickname", nickname);//传递数据
+                    intent.putExtra("token", token);//传递数据
+                    startActivity(intent);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             public void onFailure(Call call, IOException e) {
@@ -159,7 +177,5 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 System.out.println(e.getMessage());
             }
         });
-
-        return false;
     }
 }

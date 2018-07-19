@@ -36,25 +36,29 @@
                 android:gravity="center_vertical"
                 style="@style/input">
                 <TextView
+                    android:id="@+id/username_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/user_name"
                     style="@style/norm_text"/>
                 <TextView
+                    android:id="@+id/phone_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/phone_no"
                     style="@style/norm_text"/>
                 <TextView
+                    android:id="@+id/email_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
                     style="@style/norm_text"/>
 
                 <TextView
+                    android:id="@+id/nickname_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/password"
+                    android:hint="@string/nick_name"
                     style="@style/norm_text"/>
                 <Button
                     android:layout_width="match_parent"
