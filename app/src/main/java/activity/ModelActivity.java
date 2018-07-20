@@ -13,7 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.cherrycha.material_design.R;
+import cn.example.cherrycha.material_design.R;
 
 public class ModelActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 
