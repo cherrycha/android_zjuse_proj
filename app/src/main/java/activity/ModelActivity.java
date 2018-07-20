@@ -38,7 +38,6 @@ public class ModelActivity extends AppCompatActivity implements FragmentDrawer.F
         displayView(0);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -74,28 +73,30 @@ public class ModelActivity extends AppCompatActivity implements FragmentDrawer.F
         String token = intent.getStringExtra("token");
         System.out.println(token);
         bundle.putString("token",token);
-
         switch (position) {
             case 0:
                 fragment = new HomeFragment();
                 title = getString(R.string.title_home);
                 break;
             case 1:
+                fragment = new ShoppingFragment();
+                title = getString(R.string.title_shopping);
+                break;
+            case 2:
                 fragment = new ShoppingCartFragment();
                 title = getString(R.string.title_shopping_cart);
                 break;
-            case 2:
+            case 3:
                 fragment = new AddressesFragment();
                 title = getString(R.string.title_addresses);
                 break;
-            case 3:
+            case 4:
                 fragment = new OrderListFragment();
                 title = getString(R.string.title_order_list);
                 break;
             default:
                 break;
         }
-
         if (fragment != null) {
             fragment.setArguments(bundle);
             FragmentManager fragmentManager = getSupportFragmentManager();
