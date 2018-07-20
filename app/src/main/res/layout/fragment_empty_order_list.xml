@@ -6,23 +6,23 @@
     android:background="@color/colorWhite">
 
     <ImageView
-        android:id="@+id/icon_shopping_cart"
+        android:id="@+id/icon_order_list"
         android:layout_width="match_parent"
         android:layout_height="96dp"
         android:layout_marginTop="40dp"
-        android:src="@drawable/ic_action_shopping_cart"
+        android:src="@drawable/ic_action_order"
         android:scaleType="fitCenter"
         android:tint="@color/colorSecondaryText"/>
     <TextView
         android:id="@+id/label"
-        android:layout_below="@id/icon_shopping_cart"
+        android:layout_below="@id/icon_order_list"
         android:layout_alignParentTop="true"
         android:layout_width="fill_parent"
         android:layout_marginTop="160dp"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:textSize="45dp"
-        android:text="@string/title_shopping_cart"
+        android:text="@string/title_order_list"
         android:textStyle="bold"/>
 
     <TextView
@@ -30,9 +30,9 @@
         android:layout_centerInParent="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="12dp"
+        style="@style/Subheading"
         android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
-        android:text="@string/empty_shopping_cart" />
+        android:text="@string/empty_order_list" />
 
 </RelativeLayout>

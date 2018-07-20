@@ -1,4 +1,4 @@
-package com.example.cherrycha.material_design;
+package cn.example.cherrycha.material_design;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

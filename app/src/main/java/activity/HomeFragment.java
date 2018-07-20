@@ -1,17 +1,15 @@
 package activity;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.cherrycha.material_design.R;
+import cn.example.cherrycha.material_design.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,7 +25,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public HomeFragment() {
         // Required empty public constructor
@@ -45,10 +43,25 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         HttpPost(rootView);
         TextView textView = (TextView) rootView.findViewById(R.id.username_tv);
+        rootView.findViewById(R.id.edit_button).setOnClickListener(this);
         String token = getArguments().getString("token");
         textView.setText(token);
         // Inflate the layout for this fragment
         return rootView;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.edit_button:
+//                getActivity().getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .addToBackStack(null)// //将当前fragment加入到返回栈中
+//                        .replace(R.id.fragment_navigation_drawer, new EditProfileFragment(), null)
+//                        .commit();
+
+                break;
+        }
     }
 
     @Override
