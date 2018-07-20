@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="activity.ShoppingFragment"
+    >
+
+    <ImageView
+        android:id="@+id/label"
+        android:layout_width="108dp"
+        android:layout_height="108dp"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="108dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_action_shopping_cart"/>
+
+    <TextView
+        android:layout_below="@id/label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        style="@style/Subheading"
+        android:text="Add Something into your shopping cart" />
+
+</RelativeLayout>
