@@ -24,8 +24,9 @@ public class ShoppingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       View rootView = inflater.inflate(R.layout.fragment_shopping, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_shopping, container, false);
         // Inflate the layout for this fragment
+
         return rootView;
     }
 

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,23 +54,24 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        Bundle bundle = new Bundle();
+        Fragment fragment=null;
         switch (view.getId()){
             case R.id.edit_button:
-//                getActivity().getSupportFragmentManager()
-//                        .beginTransaction()
-//                        .addToBackStack(null)// //将当前fragment加入到返回栈中
-//                        .replace(R.id.fragment_navigation_drawer, new EditProfileFragment(), null)
-//                        .commit();
-
+                fragment=new EditProfileFragment();
                 break;
+        }
+
+        if (fragment != null) {
+            fragment.setArguments(bundle);
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_body, fragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         }
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-    }
 
     @Override
     public void onDetach() {

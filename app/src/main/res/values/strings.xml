@@ -29,6 +29,9 @@
         <item>@string/nav_item_order_list</item>
     </string-array>
 
+    <string name="txt_go_to_cart">GO TO CART</string>
+    <string name="txt_continue_shopping">CONTINUE SHOPPING</string>
+
     <string-array name="nav_drawer_icons">
         <item>@string/icon_item_home</item>
         <item>@string/icon_item_shopping</item>
