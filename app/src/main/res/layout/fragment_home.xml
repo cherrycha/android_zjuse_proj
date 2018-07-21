@@ -61,6 +61,7 @@
                     android:hint="@string/nick_name"
                     style="@style/norm_text"/>
                 <Button
+                    android:id="@+id/edit_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/edit_profile"

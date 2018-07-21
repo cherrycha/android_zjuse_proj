@@ -5,11 +5,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 
 import com.example.cherrycha.material_design.R;
 
@@ -27,7 +30,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
+
+    private View rootView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -40,13 +45,13 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        HttpPost(rootView);
-        TextView textView = (TextView) rootView.findViewById(R.id.username_tv);
-        String token = getArguments().getString("token");
-        textView.setText(token);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        HttpPost();
+//        TextView textView = (TextView) rootView.findViewById(R.id.username_tv);
+//        String token = getArguments().getString("token");
+//        textView.setText(token);
+        rootView.findViewById(R.id.edit_button).setOnClickListener(this);
         // Inflate the layout for this fragment
         return rootView;
     }
@@ -61,7 +66,7 @@ public class HomeFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
-    public void HttpPost(View v) {
+    public void HttpPost() {
         String url = "http://120.79.132.224:9090/shopkeeper/user/token";
 
         OkHttpClient client = new OkHttpClient();
@@ -84,7 +89,18 @@ public class HomeFragment extends Fragment {
                     String name = user.getString("username");
                     Integer phone = user.getInt("phoneNumber");
                     String nickname = user.getString("nickname");
+                    String email = user.getString("email");
                     String token = user.getString("token");
+
+                    TextView username_text = (TextView) rootView.findViewById(R.id.username_tv);
+                    username_text.setText(name);
+                    TextView phone_text = (TextView) rootView.findViewById(R.id.phone_tv);
+                    phone_text.setText(String.valueOf(phone));
+                    TextView email_text = (TextView) rootView.findViewById(R.id.email_tv);
+                    email_text.setText(email);
+                    TextView nickname_text = (TextView) rootView.findViewById(R.id.nickname_tv);
+                    nickname_text.setText(nickname);
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -96,5 +112,25 @@ public class HomeFragment extends Fragment {
                 System.out.println(e.getMessage());
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        Bundle bundle = new Bundle();
+        Fragment fragment=null;
+        switch (view.getId()){
+            case R.id.edit_button:
+                fragment=new EditProfileFragment();
+                break;
+        }
+
+        if (fragment != null) {
+            fragment.setArguments(bundle);
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_body, fragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
     }
 }
