@@ -1,4 +1,4 @@
-package cn.example.cherrycha.material_design;
+package activity;
 
 import android.content.Context;
 import android.graphics.Paint;
@@ -29,6 +29,7 @@ import java.util.zip.Inflater;
 
 import activity.EditProfileFragment;
 import activity.ShoppingFragment;
+import cn.example.cherrycha.material_design.R;
 
 
 public class ItemAddedFragment extends DialogFragment implements View.OnClickListener {

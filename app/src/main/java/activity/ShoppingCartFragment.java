@@ -3,15 +3,12 @@ package activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
-import cn.example.cherrycha.material_design.CheckOutFragment;
-import cn.example.cherrycha.material_design.ItemAddedFragment;
 import cn.example.cherrycha.material_design.R;
 
 
@@ -54,11 +51,8 @@ public class ShoppingCartFragment extends Fragment implements View.OnClickListen
         Fragment fragment=null;
         switch (view.getId()){
             case R.id.check_button:
-
                 CheckOutFragment checkOutDialog = new CheckOutFragment();
-                ItemAddedFragment itemAddedDialog = new ItemAddedFragment();
-                itemAddedDialog.show(getFragmentManager(), "EditNameDialog");
-
+                checkOutDialog.show(getFragmentManager(), "EditNameDialog");
                 break;
         }
 
@@ -69,10 +63,6 @@ public class ShoppingCartFragment extends Fragment implements View.OnClickListen
 //            fragmentTransaction.replace(R.id.container_body, fragment);
 //            fragmentTransaction.commit();
 //        }
-    }
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
     }
 
     @Override

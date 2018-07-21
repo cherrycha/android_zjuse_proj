@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         username = (EditText) findViewById(R.id.username_etx);
         password = (EditText) findViewById(R.id.password_etx);
         findViewById(R.id.login_button).setOnClickListener(this);

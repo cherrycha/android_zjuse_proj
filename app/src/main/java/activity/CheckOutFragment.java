@@ -1,4 +1,4 @@
-package cn.example.cherrycha.material_design;
+package activity;
 
 import android.content.Context;
 import android.net.Uri;
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import java.util.zip.Inflater;
 
+import cn.example.cherrycha.material_design.R;
 
 
 public class CheckOutFragment extends DialogFragment
