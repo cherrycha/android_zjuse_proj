@@ -8,7 +8,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/colorPrimary">
 
             <TextView
                 style="@style/welcome"
@@ -97,11 +98,13 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/phone_no"/>
+                            android:hint="@string/phone_no"
+                            android:inputType="phone"/>
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/email"/>
+                            android:hint="@string/email"
+                            android:inputType="textEmailAddress"/>
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -109,7 +112,8 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/password"/></LinearLayout>
+                            android:hint="@string/password"
+                            android:inputType="textPassword"/></LinearLayout>
                     </LinearLayout>
                     <Button
                         android:layout_width="match_parent"
