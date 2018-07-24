@@ -56,6 +56,11 @@
 
                     android:hint="@string/phone_no"/>
                 <EditText
+                    android:id="@+id/nickname_etx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/nick_name"/>
+                <EditText
                     android:id="@+id/email_etx"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
