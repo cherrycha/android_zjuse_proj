@@ -3,11 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="activity.EditProfileFragment"
-    android:background="@color/colorWhite">
+    android:background="@color/colorPrimary">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -17,113 +21,145 @@
             android:layout_weight="10"
             android:background="@color/colorIcons"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/edit_profile_text"
+                style="@style/subTitle"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="@string/edit_profile"
-                style="@style/subTitle"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/colorPrimaryDark"
+                android:text="@string/edit_profile" />
 
             <LinearLayout
+                style="@style/input"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
-                android:orientation="vertical"
                 android:gravity="center_vertical"
-                style="@style/input">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="2"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:orientation="vertical">
-                        <TextView
+
+                        <ImageView
+                            android:id="@+id/ic_name"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:text="@string/user_name"
-                            style="@style/norm_text"/>
-                        <TextView
+                            android:src="@drawable/ic_action_name" />
+
+                        <ImageView
+                            android:id="@+id/ic_phone_no"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:text="@string/phone_no"
-                            style="@style/norm_text"/>
-                        <TextView
+                            android:layout_below="@id/ic_name"
+                            android:src="@drawable/ic_action_phone_no" />
+
+                        <ImageView
+                            style="icon"
+                            android:id="@+id/ic_email"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:text="@string/email"
-                            style="@style/norm_text"/>
-                        <TextView
+                            android:src="@drawable/ic_action_email"
+                            android:layout_below="@id/ic_phone_no" />
+
+                        <ImageView
+                            android:id="@+id/ic_nickname"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:text="@string/nick_name"
-                            style="@style/norm_text"/>
-                        <TextView
+                            android:layout_below="@id/ic_email"
+                            android:src="@drawable/ic_action_nickname" />
+
+                        <ImageView
+                            android:id="@+id/ic_password"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:text="@string/password"
-                            style="@style/norm_text"/>
+                            android:src="@drawable/ic_action_password" />
                     </LinearLayout>
-                    <LinearLayout
+
+                    <RelativeLayout
                         android:layout_width="0dp"
-                        android:layout_weight="4"
                         android:layout_height="wrap_content"
+                        android:layout_weight="4"
                         android:orientation="vertical">
 
+                        <EditText
+                            android:id="@+id/txt_name"
+                            style="@style/Subheading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/user_name" />
 
                         <EditText
+                            android:id="@+id/txt_phone"
+                            style="@style/Subheading"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/user_name"/>
+                            android:hint="@string/phone_no"
+                            android:layout_below="@id/txt_name"/>
+
                         <EditText
+                            android:id="@+id/txt_email"
+                            style="@style/Subheading"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/phone_no"/>
+                            android:hint="@string/email"
+                            android:layout_below="@id/txt_phone"/>
+
                         <EditText
+                            android:id="@+id/txt_nickname"
+                            style="@style/Subheading"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/email"/>
+                            android:hint="@string/nick_name"
+                            android:layout_below="@id/txt_email"/>
+
                         <EditText
+                            android:id="@+id/txt_password"
+                            style="@style/Subheading"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/nick_name"/>
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/password"/></LinearLayout>
+                            android:hint="@string/password"
+                            android:layout_below="@id/txt_nickname"/>
+                    </RelativeLayout>
                 </LinearLayout>
+
                 <Button
                     android:id="@+id/save_button"
+                    style="@style/button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/save"
-                    style="@style/button"
                     android:background="@color/colorWarning"
-                    />
+                    android:text="@string/save" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="@color/colorPrimary">
+                android:background="@color/colorPrimary"
+                android:orientation="vertical">
+
                 <TextView
+                    style="@style/tiny"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="0dp"
                     android:gravity="center"
-                    android:text="@string/contact_us"
-                    style="@style/tiny"/>
+                    android:text="@string/contact_us" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

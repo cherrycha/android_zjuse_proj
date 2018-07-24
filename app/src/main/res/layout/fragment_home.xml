@@ -8,8 +8,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,76 +20,136 @@
             android:layout_weight="10"
             android:background="@color/colorIcons"
             android:orientation="vertical">
+
             <TextView
+                style="@style/subTitle"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="@string/profile"
-                style="@style/subTitle"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/colorPrimaryDark"
+                android:text="@string/profile" />
 
             <LinearLayout
+                style="@style/input"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
-                android:orientation="vertical"
                 android:gravity="center_vertical"
-                style="@style/input">
-                <TextView
-                    android:id="@+id/username_tv"
+                android:orientation="vertical">
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/user_name"
-                    style="@style/norm_text"/>
-                <TextView
-                    android:id="@+id/phone_tv"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ic_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_action_name" />
+
+                    <TextView
+                        android:id="@+id/username_tv"
+                        style="@style/norm_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/ic_name"
+
+                        android:hint="@string/user_name" />
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/phone_no"
-                    style="@style/norm_text"/>
-                <TextView
-                    android:id="@+id/email_tv"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ic_phone_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_action_phone_no" />
+
+                    <TextView
+                        android:id="@+id/phone_tv"
+                        style="@style/norm_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/ic_phone_no"
+                        android:hint="@string/phone_no" />
+                </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ic_email"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/email"
-                    style="@style/norm_text"/>
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_action_email" />
 
                 <TextView
-                    android:id="@+id/nickname_tv"
+                    android:id="@+id/email_tv"
+                    style="@style/norm_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/nick_name"
-                    style="@style/norm_text"/>
+                    android:layout_toEndOf="@id/ic_email"
+                    android:hint="@string/email" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ic_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_action_nickname" />
+                <TextView
+                    android:id="@+id/nickname_tv"
+                    style="@style/norm_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/ic_nickname"
+                    android:hint="@string/nick_name" />
+                </RelativeLayout>
+
                 <Button
                     android:id="@+id/edit_button"
+                    style="@style/button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/edit_profile"
-                    style="@style/button"
                     android:background="@color/colorWarning"
-                    />
+                    android:text="@string/edit_profile" />
+
                 <TextView
+                    style="@style/hint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:text="@string/change_password"
-                    style="@style/hint"
-                    />
+                    android:text="@string/change_password" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="@color/colorPrimary">
+                android:background="@color/colorPrimary"
+                android:orientation="vertical">
+
                 <TextView
+                    style="@style/tiny"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="0dp"
                     android:gravity="center"
-                    android:text="@string/contact_us"
-                    style="@style/tiny"/>
+                    android:text="@string/contact_us" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

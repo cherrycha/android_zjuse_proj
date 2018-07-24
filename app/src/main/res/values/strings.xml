@@ -29,6 +29,20 @@
         <item>@string/nav_item_order_list</item>
     </string-array>
 
+    <string-array name="info_labels">
+        <item>@string/txt_name</item>
+        <item>@string/txt_phone</item>
+        <item>@string/txt_email</item>
+        <item>@string/txt_nickname</item>
+        <item>@string/txt_password</item>
+    </string-array>
+
+
+    <string name="txt_name">name</string>
+    <string name="txt_phone">phone</string>
+    <string name="txt_email">email</string>
+    <string name="txt_nickname">nickname</string>
+    <string name="txt_password">password</string>
     <string name="txt_go_to_cart">GO TO CART</string>
     <string name="txt_continue_shopping">CONTINUE SHOPPING</string>
 
