@@ -31,7 +31,11 @@ import okhttp3.Response;
 
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
-
+    String name="Admin";
+    String email="123@123.com";
+    String nickname="Admin123456";
+    String phone_no="1234567890";
+    String password="password";
     private View rootView;
 
     public HomeFragment() {
@@ -92,14 +96,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     String email = user.getString("email");
                     String token = user.getString("token");
 
-                    TextView username_text = (TextView) rootView.findViewById(R.id.username_tv);
-                    username_text.setText(name);
-                    TextView phone_text = (TextView) rootView.findViewById(R.id.phone_tv);
-                    phone_text.setText(String.valueOf(phone));
-                    TextView email_text = (TextView) rootView.findViewById(R.id.email_tv);
-                    email_text.setText(email);
-                    TextView nickname_text = (TextView) rootView.findViewById(R.id.nickname_tv);
-                    nickname_text.setText(nickname);
+//                    TextView username_text = (TextView) rootView.findViewById(R.id.username_tv);
+//                    username_text.setText(name);
+//                    TextView phone_text = (TextView) rootView.findViewById(R.id.phone_tv);
+//                    phone_text.setText(String.valueOf(phone));
+//                    TextView email_text = (TextView) rootView.findViewById(R.id.email_tv);
+//                    email_text.setText(email);
+//                    TextView nickname_text = (TextView) rootView.findViewById(R.id.nickname_tv);
+//                    nickname_text.setText(nickname);
 
 
                 } catch (JSONException e) {
@@ -121,6 +125,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()){
             case R.id.edit_button:
                 fragment=new EditProfileFragment();
+                bundle.putString("name",name);
+                bundle.putString("nickname",nickname);
+                bundle.putString("email",email);
+                bundle.putString("password",password);
+                bundle.putString("phone",phone_no);
                 break;
         }
 

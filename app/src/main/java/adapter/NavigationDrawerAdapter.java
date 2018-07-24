@@ -18,12 +18,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.MyViewHolder> {
-    List<info.androidhive.materialdesign.model.NavDrawerItem> data = Collections.emptyList();
+    List<model.NavDrawerItem> data = Collections.emptyList();
     private LayoutInflater inflater;
     private Context context;
 
 
-    public NavigationDrawerAdapter(Context context, List<info.androidhive.materialdesign.model.NavDrawerItem> data) {
+    public NavigationDrawerAdapter(Context context, List<model.NavDrawerItem> data) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.data = data;
@@ -44,10 +44,11 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        info.androidhive.materialdesign.model.NavDrawerItem current = data.get(position);
+        model.NavDrawerItem current = data.get(position);
         holder.title.setText(current.getTitle());
-        holder.icon.setImageResource( context.getResources().getIdentifier(current.getIconName(),"drawable",context.getPackageName()));
+        holder.icon.setImageResource(context.getResources().getIdentifier(current.getIconName(), "drawable", context.getPackageName()));
     }
+
 
     @Override
     public int getItemCount() {
@@ -57,10 +58,11 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         ImageView icon;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.title);
-            icon=(ImageView) itemView.findViewById(R.id.icon);
+            icon = (ImageView) itemView.findViewById(R.id.icon);
         }
     }
 }

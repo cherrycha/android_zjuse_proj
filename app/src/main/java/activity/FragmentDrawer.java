@@ -20,7 +20,7 @@ import java.util.List;
 
 
 import adapter.NavigationDrawerAdapter;
-import info.androidhive.materialdesign.model.NavDrawerItem;
+import model.NavDrawerItem;
 
 public class FragmentDrawer extends Fragment {
 

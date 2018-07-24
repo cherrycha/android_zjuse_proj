@@ -26,7 +26,7 @@ public class ItemInfoFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View rootView= inflater.inflate(R.layout.fragment_item_info, container, false);
 
-        CardView card_add_to_cart=rootView.findViewById(R.id.card_add_to_cart);
+        CardView card_add_to_cart=rootView.findViewById(R.id.btn_add_to_cart);
         card_add_to_cart.setOnClickListener(this);
 
         return rootView;
@@ -35,7 +35,7 @@ public class ItemInfoFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.card_add_to_cart:
+            case R.id.btn_add_to_cart:
                 ItemAddedFragment itemAddedDialog = new ItemAddedFragment();
                 itemAddedDialog.show(getFragmentManager(), "EditNameDialog");
                 break;

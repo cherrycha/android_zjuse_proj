@@ -1,4 +1,4 @@
-package info.androidhive.materialdesign.model;
+package model;
 
 public class NavDrawerItem {
     private boolean showNotify;
