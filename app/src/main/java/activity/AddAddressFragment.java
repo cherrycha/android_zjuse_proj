@@ -4,6 +4,9 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
@@ -62,6 +65,7 @@ public class AddAddressFragment extends DialogFragment implements View.OnClickLi
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View view) {
+                Fragment fragment=null;
                 switch (view.getId()) {
                     case R.id.id_txt_confirm_add_address:
                         phoneNumber = txt_phone_no.getText().toString();
@@ -76,9 +80,7 @@ public class AddAddressFragment extends DialogFragment implements View.OnClickLi
                         }
 
                         if (flag == 1) {//修改成功
-//                                Looper.prepare();
-//                                Toast.makeText(view.getContext(), "Password changed.", Toast.LENGTH_SHORT).show();
-//                                Looper.loop();
+                              fragment = new AddressesFragment();
                             dismiss();
                         } else if (flag == 2) {//原密码错误
 //                                Looper.prepare();
@@ -86,6 +88,13 @@ public class AddAddressFragment extends DialogFragment implements View.OnClickLi
 //                                Looper.loop();
                         }
                         dismiss();
+                }
+                if (fragment != null) {
+                    fragment.setArguments(bundle);
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.container_body, fragment);
+                    fragmentTransaction.commit();
                 }
 
             }
