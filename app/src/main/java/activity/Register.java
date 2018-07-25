@@ -35,14 +35,19 @@ public class Register extends AppCompatActivity implements  View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        findViewById(R.id.register_button).setOnClickListener(this);
         username = (EditText) findViewById(R.id.username_etx);
+
         password = (EditText) findViewById(R.id.password_etx);
         phone = (EditText) findViewById(R.id.phone_etx);
         nickname = (EditText) findViewById(R.id.nickname_etx);
         email = (EditText) findViewById(R.id.email_etx);
-        findViewById(R.id.register_button).setOnClickListener(this);
 
+        username.setText("cherry");
+        password.setText("123456");
+        phone.setText("18963668889");
+        nickname.setText("cha");
+        email.setText("123@qq.com");
     }
 
     @Override
@@ -71,18 +76,10 @@ public class Register extends AppCompatActivity implements  View.OnClickListener
                 .add("username", username.getText().toString())
                 .add("phoneNumber",phone.getText().toString())
                 .add("nickname",nickname.getText().toString())
-                //.add("email",email.getText().toString())
+                .add("email",email.getText().toString())
                 .add("password",password.getText().toString())
                 .add("type","1")
                 .build(); // 表单键值对
-//        RequestBody formBody = new FormBody.Builder()
-//                .add("username", "admin1")
-//                .add("phoneNumber","18867150658")
-//                .add("nickname","hello1")
-//                .add("email","hello1@zju.edu.cn")
-//                .add("password","hello1")
-//                .add("type","1")
-//                .build(); // 表单键值对
         Request request = new Request.Builder().url(url).post(formBody).build(); // 请求
 
         client.newCall(request).enqueue(new Callback() { // 回调

@@ -28,6 +28,8 @@ public class ModelActivity extends AppCompatActivity implements FragmentDrawer.F
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
     private String token;
+    private String name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,8 +81,9 @@ public class ModelActivity extends AppCompatActivity implements FragmentDrawer.F
         Bundle bundle = new Bundle();
         Intent intent = getIntent();
         token = intent.getStringExtra("token");
-//        System.out.println(token);
+        name = intent.getStringExtra("name");
         bundle.putString("token",token);
+        bundle.putString("name",name);
         switch (position) {
             case 0:
                 fragment = new HomeFragment();
@@ -91,8 +94,10 @@ public class ModelActivity extends AppCompatActivity implements FragmentDrawer.F
                 title = getString(R.string.title_shopping);
                 break;
             case 2:
-                fragment = new ShoppingCartFragment();
+//                fragment = new ShoppingCartFragment();
                 title = getString(R.string.title_shopping_cart);
+                fragment=new CardFragment();
+                title=getString(R.string.title_card);
                 break;
             case 3:
                 fragment = new AddressesFragment();

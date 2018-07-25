@@ -27,7 +27,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="@color/colorPrimaryDark"
-                android:text="@string/profile" />
+                android:text="@string/title_card" />
 
             <LinearLayout
                 style="@style/input"
@@ -50,13 +50,12 @@
                         android:src="@drawable/ic_action_name" />
 
                     <TextView
-                        android:id="@+id/username_tv"
+                        android:id="@+id/name_tv"
                         style="@style/norm_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@id/ic_name"
-
-                        android:hint="@string/user_name" />
+                        android:hint="@string/name" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -64,77 +63,77 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:id="@+id/name"
+                        android:id="@+id/ic_card"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_marginTop="8dp"
-                        android:src="@drawable/ic_action_phone_no" />
+                        android:src="@drawable/ic_action_credit_card" />
 
                     <TextView
-                        android:id="@+id/phone_tv"
+                        android:id="@+id/card_tv"
                         style="@style/norm_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/name"
-                        android:hint="@string/phone_no" />
+                        android:layout_toEndOf="@id/ic_card"
+                        android:hint="@string/card_no" />
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/ic_card_no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="8dp"
-                    android:src="@drawable/ic_action_email" />
+                    <ImageView
+                        android:id="@+id/ic_bank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_action_bank" />
 
-                <TextView
-                    android:id="@+id/email_tv"
-                    style="@style/norm_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/ic_card_no"
-                    android:hint="@string/email" />
+                    <TextView
+                        android:id="@+id/bank_tv"
+                        style="@style/norm_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/ic_bank"
+                        android:hint="@string/bank" />
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/ic_bank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="8dp"
-                    android:src="@drawable/ic_action_nickname" />
-                <TextView
-                    android:id="@+id/nickname_tv"
-                    style="@style/norm_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/ic_bank"
-                    android:hint="@string/nick_name" />
+                    <ImageView
+                        android:id="@+id/ic_balance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_action_money" />
+                    <TextView
+                        android:id="@+id/balance_tv"
+                        style="@style/norm_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/ic_balance"
+                        android:hint="@string/balance" />
                 </RelativeLayout>
 
+                <!--<Button-->
+                    <!--android:id="@+id/edit_button"-->
+                    <!--style="@style/button"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/colorWarning"-->
+                    <!--android:text="@string/edit_card"-->
+                    <!--android:clickable="true"/>-->
                 <Button
-                    android:id="@+id/edit_button"
+                    android:id="@+id/delete_button"
                     style="@style/button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorWarning"
-                    android:text="@string/edit_profile" />
-
-                <TextView
-                    style="@style/hint"
-                    android:id="@+id/id_txt_change_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:text="@string/change_password" />
+                    android:background="@color/colorSecondaryText"
+                    android:text="@string/del_card"
+                    android:clickable="true"/>
             </LinearLayout>
 
             <LinearLayout

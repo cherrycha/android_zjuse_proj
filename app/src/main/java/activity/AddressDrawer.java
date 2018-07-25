@@ -22,7 +22,7 @@ import java.util.List;
 import adapter.NavigationDrawerAdapter;
 import model.NavDrawerItem;
 
-public class FragmentDrawer extends Fragment {
+public class AddressDrawer extends Fragment {
 
     private static String TAG = FragmentDrawer.class.getSimpleName();
 
@@ -35,7 +35,7 @@ public class FragmentDrawer extends Fragment {
     private static String[] icon_names=null;
     private FragmentDrawerListener drawerListener;
 
-    public FragmentDrawer() {
+    public AddressDrawer() {
 
     }
 
@@ -46,7 +46,7 @@ public class FragmentDrawer extends Fragment {
     public static List<NavDrawerItem> getData() {
         List<NavDrawerItem> data = new ArrayList<>();
 
-       // preparing navigation drawer items
+        // preparing navigation drawer items
         for (int i = 0; i < titles.length; i++) {
             NavDrawerItem navItem = new NavDrawerItem();
             navItem.setTitle(titles[i]);
@@ -59,9 +59,6 @@ public class FragmentDrawer extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // drawer labels
-        //todo:这里定义了侧边栏的栏目
         titles = getActivity().getResources().getStringArray(R.array.nav_drawer_labels);
         icon_names=getActivity().getResources().getStringArray(R.array.nav_drawer_icons);
     }
@@ -70,8 +67,8 @@ public class FragmentDrawer extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflating view layout
-        View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
-        recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
+        View layout = inflater.inflate(R.layout.fragment_address, container, false);
+        recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view);
 
         adapter = new NavigationDrawerAdapter(getActivity(), getData());
         recyclerView.setAdapter(adapter);

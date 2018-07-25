@@ -50,12 +50,12 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                        <ImageView
-                            android:id="@+id/ic_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/ic_action_name" />
+                        <!--<ImageView-->
+                            <!--android:id="@+id/ic_name"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="0dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:src="@drawable/ic_action_name" />-->
 
                         <ImageView
                             android:id="@+id/ic_phone_no"
@@ -96,12 +96,12 @@
                         android:layout_weight="4"
                         android:orientation="vertical">
 
-                        <EditText
-                            android:id="@+id/txt_name"
-                            style="@style/Subheading"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/user_name" />
+                        <!--<EditText-->
+                            <!--android:id="@+id/txt_name"-->
+                            <!--style="@style/Subheading"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:hint="@string/user_name" />-->
 
                         <EditText
                             android:id="@+id/txt_phone"
@@ -109,7 +109,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/phone_no"
-                            android:layout_below="@id/txt_name"/>
+                            />
 
                         <EditText
                             android:id="@+id/txt_email"

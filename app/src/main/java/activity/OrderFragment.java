@@ -29,7 +29,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 
-public class OrderListFragment extends Fragment  {
+public class OrderFragment extends Fragment  {
     RecyclerView recyclerView;
     Bundle bundle = new Bundle();
     String token;
@@ -38,7 +38,7 @@ public class OrderListFragment extends Fragment  {
     private FragmentDrawer drawerFragment;
     private FragmentDrawer.FragmentDrawerListener drawerListener;
 
-    public OrderListFragment() {
+    public OrderFragment() {
         // Required empty public constructor
 
     }

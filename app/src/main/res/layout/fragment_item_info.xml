@@ -54,7 +54,7 @@
                 android:layout_below="@id/item_intro"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginVertical="8dp"
-                android:text="CNY ￥12"
+                android:text="CNY ￥"
 
                 />
 

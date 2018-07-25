@@ -1,5 +1,6 @@
 package activity;
 
+import android.content.ClipData;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -31,7 +32,8 @@ public class ItemInfoFragment extends Fragment implements View.OnClickListener {
     private ImageView image;
     private TextView name,descript,price,location;
     private View rootView;
-
+    private String token;
+    private static int flag=0;
     public ItemInfoFragment() {
         // Required empty public constructor
     }
@@ -91,7 +93,7 @@ public class ItemInfoFragment extends Fragment implements View.OnClickListener {
                     name.setText(in_name);
                     descript.setText(in_description);
                     //location.setText(in_location);
-                    price.setText(String.valueOf(in_price));
+                    price.setText("CNY ￥"+String.valueOf(in_price));
                     if(in_pic.equals("apple")){
                         image.setImageResource(R.drawable.apple);
                     }else if(in_pic.equals("water")){
@@ -120,6 +122,15 @@ public class ItemInfoFragment extends Fragment implements View.OnClickListener {
                 ItemAddedFragment itemAddedDialog = new ItemAddedFragment();
                 itemAddedDialog.show(getFragmentManager(), "EditNameDialog");
                 break;
+            case R.id.btn_buy_now:
+                try {
+                    while(flag==0){
+                        Thread.sleep(100);
+                    }
+                }catch(Exception e){
+
+                }
+
         }
     }
 }
