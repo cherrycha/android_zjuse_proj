@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.cherrycha.material_design.R;
+import cn.example.cherrycha.material_design.R;
 
 import java.util.Collections;
 import java.util.List;

@@ -29,7 +29,7 @@ import java.util.zip.Inflater;
 
 import activity.EditProfileFragment;
 import activity.ShoppingFragment;
-import com.example.cherrycha.material_design.R;
+import cn.example.cherrycha.material_design.R;
 
 
 public class ItemAddedFragment extends DialogFragment implements View.OnClickListener {

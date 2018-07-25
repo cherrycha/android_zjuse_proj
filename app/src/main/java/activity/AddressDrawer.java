@@ -13,7 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.cherrycha.material_design.R;
+import cn.example.cherrycha.material_design.R;
 
 import java.util.ArrayList;
 import java.util.List;

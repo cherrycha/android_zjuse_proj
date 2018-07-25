@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.cherrycha.material_design.R;
+import cn.example.cherrycha.material_design.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,10 +25,10 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class Register extends AppCompatActivity implements  View.OnClickListener {
+public class Register extends AppCompatActivity implements View.OnClickListener {
 
-    EditText username,password,email,phone,nickname;
-    String Msg=null;
+    EditText username, password, email, phone, nickname;
+    String Msg = null;
     String Code = null;
 
     @Override
@@ -42,7 +42,7 @@ public class Register extends AppCompatActivity implements  View.OnClickListener
         phone = (EditText) findViewById(R.id.phone_etx);
         nickname = (EditText) findViewById(R.id.nickname_etx);
         email = (EditText) findViewById(R.id.email_etx);
-
+        findViewById(R.id.btn_contact_us).setOnClickListener(this);
         username.setText("cherry");
         password.setText("123456");
         phone.setText("18963668889");
@@ -52,18 +52,21 @@ public class Register extends AppCompatActivity implements  View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.register_button://读写MifareClassic格式
                 HttpPost();
                 try {
                     Thread.sleep(2000);
-                    Toast.makeText(this,Msg,Toast.LENGTH_SHORT).show();
-                    if(Code.equals("0000")){
-                        startActivity(new Intent(this,MainActivity.class));
+                    Toast.makeText(this, Msg, Toast.LENGTH_SHORT).show();
+                    if (Code.equals("0000")) {
+                        startActivity(new Intent(this, MainActivity.class));
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                break;
+            case R.id.btn_contact_us:
+                startActivity(new Intent(this, AboutUsActivity.class));
                 break;
         }
     }
@@ -74,11 +77,11 @@ public class Register extends AppCompatActivity implements  View.OnClickListener
         OkHttpClient client = new OkHttpClient();
         RequestBody formBody = new FormBody.Builder()
                 .add("username", username.getText().toString())
-                .add("phoneNumber",phone.getText().toString())
-                .add("nickname",nickname.getText().toString())
-                .add("email",email.getText().toString())
-                .add("password",password.getText().toString())
-                .add("type","1")
+                .add("phoneNumber", phone.getText().toString())
+                .add("nickname", nickname.getText().toString())
+                .add("email", email.getText().toString())
+                .add("password", password.getText().toString())
+                .add("type", "1")
                 .build(); // 表单键值对
         Request request = new Request.Builder().url(url).post(formBody).build(); // 请求
 
@@ -89,7 +92,7 @@ public class Register extends AppCompatActivity implements  View.OnClickListener
                 try {
                     String result = new String(response.body().string());
                     System.out.println(result);
-                    JSONObject responseobj=new JSONObject(result);
+                    JSONObject responseobj = new JSONObject(result);
                     Code = responseobj.getString("resultCode");
                     Msg = responseobj.getString("resultMsg");
 

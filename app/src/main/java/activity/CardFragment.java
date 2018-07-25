@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cherrycha.material_design.R;
+import cn.example.cherrycha.material_design.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

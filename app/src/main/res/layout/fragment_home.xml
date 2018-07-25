@@ -144,13 +144,16 @@
                 android:background="@color/colorPrimary"
                 android:orientation="vertical">
 
-                <TextView
-                    style="@style/tiny"
+                <Button
+                    android:id="@+id/btn_contact_us"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="0dp"
                     android:gravity="center"
-                    android:text="@string/contact_us" />
+                    android:text="@string/contact_us"
+                    android:background="@color/colorPrimary"
+                    android:clickable="true"
+                    style="@style/tiny"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.cherrycha.material_design.R;
+import cn.example.cherrycha.material_design.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -34,7 +34,7 @@ public class OrderListFragment extends Fragment  {
     Bundle bundle = new Bundle();
     String token;
     private static int flag = 0;
-    private static JSONArray orders = null;
+    private static JSONArray orders = new JSONArray();
     private FragmentDrawer drawerFragment;
     private FragmentDrawer.FragmentDrawerListener drawerListener;
 

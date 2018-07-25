@@ -19,7 +19,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cherrycha.material_design.R;
+import cn.example.cherrycha.material_design.R;
 
 import java.io.IOException;
 
@@ -52,6 +52,7 @@ public class ModelActivity extends AppCompatActivity implements FragmentDrawer.F
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 
@@ -64,6 +65,7 @@ public class ModelActivity extends AppCompatActivity implements FragmentDrawer.F
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            finish();
             return true;
         }
 

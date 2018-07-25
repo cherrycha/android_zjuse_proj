@@ -1,6 +1,7 @@
 package activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Looper;
@@ -19,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.cherrycha.material_design.R;
+import cn.example.cherrycha.material_design.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,7 +47,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     String token;
     Bundle bundle = new Bundle();
     private View rootView;
-    private static int flag=0;
+    private static int flag = 0;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -63,22 +65,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
         token = getArguments().getString("token");
         bundle.putString("token", token);
-        flag=0;
+        flag = 0;
         nickname_txt = rootView.findViewById(R.id.nickname_tv);
         email_txt = rootView.findViewById(R.id.email_tv);
         phone_no_txt = rootView.findViewById(R.id.phone_tv);
         username_txt = rootView.findViewById(R.id.username_tv);
-
+        rootView.findViewById(R.id.btn_contact_us).setOnClickListener(this);
         //---------------------------------------------
-        TextView txt_change_password=rootView.findViewById(R.id.id_txt_change_password);
+        TextView txt_change_password = rootView.findViewById(R.id.id_txt_change_password);
         final SpannableStringBuilder style1 = new SpannableStringBuilder();
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View view) {
-                Bundle bundle=new Bundle();
-                bundle.putString("token",token);
-                android.support.v4.app.Fragment fragment=null;
-                switch (view.getId()){
+                Bundle bundle = new Bundle();
+                bundle.putString("token", token);
+                android.support.v4.app.Fragment fragment = null;
+                switch (view.getId()) {
                     case R.id.id_txt_change_password:
                         ChangePasswordFragment itemAddedDialog = new ChangePasswordFragment();
                         itemAddedDialog.setArguments(bundle);
@@ -95,7 +97,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             }
         };
-        String txt_continue_shopping=getActivity().getString(R.string.txt_change_password);
+        String txt_continue_shopping = getActivity().getString(R.string.txt_change_password);
         style1.append(txt_continue_shopping);
 
         style1.setSpan(clickableSpan, 0, txt_continue_shopping.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -107,9 +109,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         HttpPost();
         try {
-            while(flag==0)
-            Thread.sleep(100);
-        }catch (Exception e){
+            while (flag == 0)
+                Thread.sleep(100);
+        } catch (Exception e) {
 
         }
 
@@ -132,7 +134,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void HttpPost() {
         String url = "http://120.79.132.224:9090/shopkeeper/user";
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(url).header("token",token).build(); // 请求
+        Request request = new Request.Builder().url(url).header("token", token).build(); // 请求
         client.newCall(request).enqueue(new Callback() { // 回调
 
             public void onResponse(Call call, Response response) throws IOException {
@@ -142,7 +144,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     System.out.println(result);
                     JSONObject responseobj = new JSONObject(result);
 
-                    if(responseobj.getString("resultCode").equals("0000")) {
+                    if (responseobj.getString("resultCode").equals("0000")) {
                         JSONObject user = responseobj.getJSONObject("userInfo");//通过user字段获取其所包含的JSONObject对象
                         name = user.getString("username");
                         Long phone = user.getLong("phoneNumber");
@@ -152,12 +154,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         username_txt.setText(name);
                         phone_no_txt.setText(String.valueOf(phone));
                         email_txt.setText(email);
-                    }else{
+                    } else {
                         Looper.prepare();
                         Toast.makeText(getActivity(), "Fail to get userInfo", Toast.LENGTH_SHORT).show();
                         Looper.loop();
                     }
-                    flag=1;
+                    flag = 1;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -166,7 +168,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             public void onFailure(Call call, IOException e) {
                 // 请求失败调用
                 System.out.println(e.getMessage());
-                flag=2;
+                flag = 2;
             }
         });
     }
@@ -186,6 +188,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 bundle.putString("password", password);
                 bundle.putString("phone", phone_no_txt.getText().toString());
                 bundle.putString("token", token);
+                break;
+            case R.id.btn_contact_us:
+                startActivity(new Intent(getActivity(), AboutUsActivity.class));
                 break;
         }
 

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    tools:context="activity.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="24dp" >
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimary"
+            android:layout_marginLeft="-12dp"
+            style="@style/Headline"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:textColor="@color/colorWhite"
+            android:gravity="center"
+            android:text="@string/contact_us"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp">
+
+            <ImageView
+                android:id="@+id/img_cherry"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/cherry" />
+
+            <TextView
+                android:id="@+id/name_cherry"
+                style="@style/Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_toEndOf="@id/img_cherry"
+                android:text="查玥" />
+
+            <TextView
+                style="@style/Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/name_cherry"
+                android:layout_below="@id/name_cherry"
+                android:layout_marginTop="8dp"
+                android:text="tel: 18963668889" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp">
+
+            <ImageView
+                android:id="@+id/img_wang"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/wang" />
+
+            <TextView
+                android:id="@+id/name_wang"
+                style="@style/Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_toEndOf="@id/img_wang"
+                android:text="王泽杰" />
+
+            <TextView
+                style="@style/Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/name_wang"
+                android:layout_below="@id/name_wang"
+                android:layout_marginTop="8dp"
+                android:text="tel: 18867533827" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp">
+
+            <ImageView
+                android:id="@+id/img_chen"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/chen" />
+
+            <TextView
+                android:id="@+id/name_chen"
+                style="@style/Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_toEndOf="@id/img_chen"
+                android:text="陈婉兵" />
+
+            <TextView
+                style="@style/Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/name_chen"
+                android:layout_below="@id/name_chen"
+                android:layout_marginTop="8dp"
+                android:text="tel: 18867139077" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp">
+
+            <ImageView
+                android:id="@+id/img_ma"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/ma" />
+
+            <TextView
+                android:id="@+id/name_ma"
+                style="@style/Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_toEndOf="@id/img_ma"
+                android:text="马汉" />
+
+            <TextView
+                style="@style/Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/name_ma"
+                android:layout_below="@id/name_ma"
+                android:layout_marginTop="8dp"
+                android:text="tel: 13758144611" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp">
+
+            <ImageView
+                android:id="@+id/img_cai"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/cai" />
+
+            <TextView
+                android:id="@+id/name_cai"
+                style="@style/Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_toEndOf="@id/img_cai"
+                android:text="蔡庆鹏" />
+
+            <TextView
+                style="@style/Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/name_cai"
+                android:layout_below="@id/name_cai"
+                android:layout_marginTop="8dp"
+                android:text="tel: 18867150657" />
+        </RelativeLayout>
+      
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

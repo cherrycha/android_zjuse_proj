@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-import com.example.cherrycha.material_design.R;
+import cn.example.cherrycha.material_design.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,8 +34,14 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-public class MainActivity extends AppCompatActivity implements  View.OnClickListener {
-    EditText username,password;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    EditText username, password;
+    int flag = 0;
+    String name, nickname;
+    Integer phone;
+
+    String token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         password.setText("123456");
         findViewById(R.id.login_button).setOnClickListener(this);
         findViewById(R.id.register_button).setOnClickListener(this);
+        findViewById(R.id.btn_contact_us).setOnClickListener(this);
     }
 
 
@@ -74,17 +81,38 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     }
 
 
-
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.login_button:
+                flag=0;
                 HttpPost();
+                try {
+                    while (flag == 0)
+                        Thread.sleep(100);
+                } catch (Exception e) {
+
+                }
+                if(flag==1){
+
+                    Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(MainActivity.this, ModelActivity.class);
+                    intent.putExtra("username", name);//传递数据
+                    intent.putExtra("phone", phone);//传递数据
+                    intent.putExtra("nickname", nickname);//传递数据
+                    intent.putExtra("token", token);//传递数据
+                    intent.putExtra("name", name);//传递数据
+                    startActivity(intent);
+                }
+
                 break;
             case R.id.register_button:
-                startActivity(new Intent(this,Register.class));
+                startActivity(new Intent(this, Register.class));
                 break;
+            case R.id.btn_contact_us:
+                startActivity(new Intent(this, AboutUsActivity.class));
         }
     }
 
@@ -92,8 +120,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         String url = "http://120.79.132.224:9090/shopkeeper/user/token";
         OkHttpClient client = new OkHttpClient();
         RequestBody formBody = new FormBody.Builder().add("account", username.getText().toString())
-                .add("password",password.getText().toString())
-                .add("method","0")
+                .add("password", password.getText().toString())
+                .add("method", "0")
                 .build(); // 表单键值对
         Request request = new Request.Builder().url(url).post(formBody).build(); // 请求
 
@@ -104,29 +132,20 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
                 try {
                     String result = new String(response.body().string());
                     System.out.println(result);
-                    JSONObject responseobj=new JSONObject(result);
+                    JSONObject responseobj = new JSONObject(result);
 
-                    if(responseobj.getString("resultCode").equals("0000")){
+                    if (responseobj.getString("resultCode").equals("0000")) {
                         JSONObject user = responseobj.getJSONObject("userInfo");//通过user字段获取其所包含的JSONObject对象
-                        String name = user.getString("username");
-                        Integer phone = user.getInt("phoneNumber");
-                        String nickname = user.getString("nickname");
-                        String token = user.getString("token");
-                        System.out.println("token:"+token);
-                        Intent intent = new Intent(MainActivity.this,ModelActivity.class);
-                        intent.putExtra("username", name);//传递数据
-                        intent.putExtra("phone", phone);//传递数据
-                        intent.putExtra("nickname", nickname);//传递数据
-                        intent.putExtra("token", token);//传递数据
-                        intent.putExtra("name", name);//传递数据
-                        startActivity(intent);
-                        Looper.prepare();
-                        Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
-                        Looper.loop();
-                    }else{
+                        name = user.getString("username");
+                        phone = user.getInt("phoneNumber");
+                        nickname = user.getString("nickname");
+                        token = user.getString("token");
+                        flag=1;
+                    } else {
                         Looper.prepare();
                         Toast.makeText(getApplicationContext(), "Wrong User Name or Password", Toast.LENGTH_SHORT).show();
                         Looper.loop();
+                        flag=2;
                     }
 
                 } catch (JSONException e) {

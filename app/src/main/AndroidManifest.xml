@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.cherrycha.material_design">
+    package="cn.example.cherrycha.material_design">
 
     <!--API level 9只包含有限的tag支持,包括：
     .通过ACTION_TAG_DISCOVERED来发布Tag信息
@@ -51,6 +51,15 @@
             <meta-data  android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/tech_list"
                 />
+        </activity>
+        <activity android:name="activity.AboutUsActivity"
+            android:launchMode="singleTop"
+            android:label="Contact Us">
+
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
         </activity>
     </application>
 

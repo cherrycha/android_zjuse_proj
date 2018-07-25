@@ -95,12 +95,15 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:background="@color/colorPrimary">
-                <TextView
+                <Button
+                    android:id="@+id/btn_contact_us"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="0dp"
                     android:gravity="center"
                     android:text="@string/contact_us"
+                    android:background="@color/colorPrimary"
+                    android:clickable="true"
                     style="@style/tiny"/>
             </LinearLayout>
         </LinearLayout>
