@@ -2,6 +2,7 @@ package activity;
 
 import android.os.Bundle;
 import android.os.Looper;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -84,7 +85,15 @@ public class OrderListFragment extends Fragment  {
 
                 @Override
                 public void onLongClick(View view, int position) {
+                    DialogFragment fragment = new DeleteOrderFragment();
+                    try {
+                        Integer id=(orders.getJSONObject(position).getInt("id"));
+                        bundle.putString("id", id.toString());
+                    }catch(Exception e){
 
+                    }
+                    fragment.setArguments(bundle);
+                    fragment.show(getFragmentManager(), "EditNameDialog");
                 }
             }));
         }else {

@@ -2,7 +2,6 @@ package activity;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.Looper;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,6 +20,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
+import model.MyRegex;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -67,27 +67,33 @@ public class AddAddressFragment extends DialogFragment implements View.OnClickLi
             public void onClick(View view) {
                 Fragment fragment=null;
                 switch (view.getId()) {
-                    case R.id.id_txt_confirm_add_address:
+                    case R.id.id_txt_confirm:
+                        MyRegex regex=new MyRegex();
                         phoneNumber = txt_phone_no.getText().toString();
                         addressDescription = txt_address.getText().toString();
-                        flag = 0;
-                        HttpPost();
-                        try {
-                            while (flag == 0)
-                                Thread.sleep(100);
-                        } catch (Exception e) {
+                        if(MyRegex.isValidPhoneNumber(phoneNumber)){
+                            flag = 0;
+                            HttpPost();
+                            try {
+                                while (flag == 0)
+                                    Thread.sleep(100);
+                            } catch (Exception e) {
 
-                        }
+                            }
 
-                        if (flag == 1) {//修改成功
-                              fragment = new AddressesFragment();
-                            dismiss();
-                        } else if (flag == 2) {//原密码错误
+                            if (flag == 1) {//修改成功
+                                fragment = new AddressesFragment();
+                                dismiss();
+                            } else if (flag == 2) {//原密码错误
 //                                Looper.prepare();
 //                                Toast.makeText(getActivity(), "Wrong Old Password, Please Check", Toast.LENGTH_LONG).show();
 //                                Looper.loop();
+                            }
+                            dismiss();
+                        }else{
+                            Toast.makeText(getActivity(), "Invalid Phone Number, Please Check", Toast.LENGTH_LONG).show();
                         }
-                        dismiss();
+
                 }
                 if (fragment != null) {
                     fragment.setArguments(bundle);
@@ -100,7 +106,7 @@ public class AddAddressFragment extends DialogFragment implements View.OnClickLi
             }
         };
 
-        TextView continue_shopping = view.findViewById(R.id.id_txt_confirm_add_address);
+        TextView continue_shopping = view.findViewById(R.id.id_txt_confirm);
 
 
         String txt_confirm = getActivity().getString(R.string.txt_confirm);

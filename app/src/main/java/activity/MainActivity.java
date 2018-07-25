@@ -105,6 +105,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     intent.putExtra("token", token);//传递数据
                     intent.putExtra("name", name);//传递数据
                     startActivity(intent);
+                }else if(flag==2){
+                    Toast.makeText(getApplicationContext(), "Wrong User Name or Password", Toast.LENGTH_SHORT).show();
                 }
 
                 break;
@@ -131,7 +133,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // 请求成功调用，该回调在子线程
                 try {
                     String result = new String(response.body().string());
-                    System.out.println(result);
                     JSONObject responseobj = new JSONObject(result);
 
                     if (responseobj.getString("resultCode").equals("0000")) {
@@ -142,9 +143,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         token = user.getString("token");
                         flag=1;
                     } else {
-                        Looper.prepare();
-                        Toast.makeText(getApplicationContext(), "Wrong User Name or Password", Toast.LENGTH_SHORT).show();
-                        Looper.loop();
                         flag=2;
                     }
 

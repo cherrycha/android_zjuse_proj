@@ -69,26 +69,6 @@
                 android:gravity="left"
                 style="@style/Body1"
                 android:text="@string/test"/>
-            <ImageButton
-                android:id="@+id/btn_delete_addr"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_toStartOf="@id/btn_edit_addr"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/ic_action_delete"
-                android:tint="@color/colorWarning"
-                />
-            <ImageButton
-                android:id="@+id/btn_edit_addr"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/ic_action_edit"
-                android:tint="@color/colorWarning"
-                />
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

@@ -65,6 +65,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
         token = getArguments().getString("token");
         bundle.putString("token", token);
+        System.out.println("token:"+token);
         flag = 0;
         nickname_txt = rootView.findViewById(R.id.nickname_tv);
         email_txt = rootView.findViewById(R.id.email_tv);
@@ -135,6 +136,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         String url = "http://120.79.132.224:9090/shopkeeper/user";
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(url).header("token", token).build(); // 请求
+
         client.newCall(request).enqueue(new Callback() { // 回调
 
             public void onResponse(Call call, Response response) throws IOException {

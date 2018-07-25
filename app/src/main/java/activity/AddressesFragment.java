@@ -77,11 +77,11 @@ public class AddressesFragment extends Fragment implements View.OnClickListener 
         } catch (Exception e) {
 
         }
-        if(addresses.length()>0) {
-        rootView = inflater.inflate(R.layout.fragment_address, container, false);
+        if (addresses.length() > 0) {
+            rootView = inflater.inflate(R.layout.fragment_address, container, false);
 
-        recyclerView = rootView.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//这里用线性显示 类似于listview
+            recyclerView = rootView.findViewById(R.id.recycler_view);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//这里用线性显示 类似于listview
 //        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));//这里用线性宫格显示 类似于grid view
 //        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL));//这里用线性宫格显示 类似于瀑布流
 
@@ -89,15 +89,34 @@ public class AddressesFragment extends Fragment implements View.OnClickListener 
             recyclerView.addOnItemTouchListener(new FragmentDrawer.RecyclerTouchListener(getActivity(), recyclerView, new FragmentDrawer.ClickListener() {
                 @Override
                 public void onClick(View view, int position) {
+                    DialogFragment fragment = new EditAddressFragment();
+                    try {
+                        bundle.putString("address", addresses.getJSONObject(position).getString("addressDescription"));
+                        bundle.putString("phone_no", addresses.getJSONObject(position).getString("phoneNumber"));
+                        Integer id=(addresses.getJSONObject(position).getInt("id"));
+                        bundle.putString("id", id.toString());
+                    }catch(Exception e){
 
+                    }
+                    fragment.setArguments(bundle);
+
+                    fragment.show(getFragmentManager(), "EditNameDialog");
                 }
 
                 @Override
                 public void onLongClick(View view, int position) {
+                    DialogFragment fragment = new DeleteAddressFragment();
+                    try {
+                        Integer id=(addresses.getJSONObject(position).getInt("id"));
+                        bundle.putString("id", id.toString());
+                    }catch(Exception e){
 
+                    }
+                    fragment.setArguments(bundle);
+                    fragment.show(getFragmentManager(), "EditNameDialog");
                 }
             }));
-        }else {
+        } else {
             rootView = inflater.inflate(R.layout.fragment_empty_address, container, false);
         }
         // Inflate the layout for this fragment
@@ -109,14 +128,6 @@ public class AddressesFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onDetach() {
         super.onDetach();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-//        Looper.prepare();
-//        Toast.makeText(getActivity(), "done~", Toast.LENGTH_SHORT).show();
-//        Looper.loop();
     }
 
     public void HttpPost() {
@@ -165,7 +176,7 @@ public class AddressesFragment extends Fragment implements View.OnClickListener 
                 AddAddressFragment itemAddedDialog = new AddAddressFragment();
                 itemAddedDialog.setArguments(bundle);
                 itemAddedDialog.show(getFragmentManager(), "EditNameDialog");
-                fragment=new AddressesFragment();
+                fragment = new AddressesFragment();
                 break;
         }
 
@@ -187,6 +198,8 @@ public class AddressesFragment extends Fragment implements View.OnClickListener 
                 AddressDrawerItem addrItem = new AddressDrawerItem();
                 String address = addresses.getJSONObject(i).getString("addressDescription");
                 String phone_no = addresses.getJSONObject(i).getString("phoneNumber");
+                Integer type=Integer.valueOf(addresses.getJSONObject(i).getString("type"));
+                addrItem.setIcon_name(type==1?"ic_action_address":"ic_action_location_off");
                 addrItem.setAddress(address);
                 addrItem.setPhone_no(phone_no);
                 data.add(addrItem);

@@ -115,7 +115,7 @@ public class CardFragment extends Fragment implements View.OnClickListener {
 
                 }
                 if(flag==1){
-                    Toast.makeText(getActivity(), "Card Deleted, Please Refresh The Page", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Card Deleted", Toast.LENGTH_SHORT).show();
                 }
                 fragment = new CardFragment();
                 break;

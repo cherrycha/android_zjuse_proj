@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import model.MyRegex;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -30,12 +31,14 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     EditText username, password, email, phone, nickname;
     String Msg = null;
     String Code = null;
+    int flag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         findViewById(R.id.register_button).setOnClickListener(this);
+        findViewById(R.id.btn_back).setOnClickListener(this);
         username = (EditText) findViewById(R.id.username_etx);
 
         password = (EditText) findViewById(R.id.password_etx);
@@ -43,6 +46,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         nickname = (EditText) findViewById(R.id.nickname_etx);
         email = (EditText) findViewById(R.id.email_etx);
         findViewById(R.id.btn_contact_us).setOnClickListener(this);
+        //todo:del
         username.setText("cherry");
         password.setText("123456");
         phone.setText("18963668889");
@@ -54,19 +58,33 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.register_button://读写MifareClassic格式
-                HttpPost();
-                try {
-                    Thread.sleep(2000);
-                    Toast.makeText(this, Msg, Toast.LENGTH_SHORT).show();
-                    if (Code.equals("0000")) {
-                        startActivity(new Intent(this, MainActivity.class));
+                if (MyRegex.isValidEmail(email.getText().toString()) && MyRegex.isValidPhoneNumber(phone.getText().toString())) {
+                    flag = 0;
+                    HttpPost();
+                    try {
+                        while (flag == 0)
+                            Thread.sleep(100);
+                        Toast.makeText(this, Msg, Toast.LENGTH_SHORT).show();
+                        if (Code.equals("0000")) {
+                            startActivity(new Intent(this, MainActivity.class));
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                } else {
+                    if (!MyRegex.isValidEmail(email.getText().toString())) {
+                        Toast.makeText(this, "Invalid Email Address, Please Check!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Invalid Phone Number, Please Check!", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
                 break;
             case R.id.btn_contact_us:
                 startActivity(new Intent(this, AboutUsActivity.class));
+                break;
+            case R.id.btn_back:
+                finish();
                 break;
         }
     }
@@ -95,7 +113,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     JSONObject responseobj = new JSONObject(result);
                     Code = responseobj.getString("resultCode");
                     Msg = responseobj.getString("resultMsg");
-
+                    flag=1;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -103,6 +121,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
             public void onFailure(Call call, IOException e) {
                 // 请求失败调用
+                flag=1;
                 System.out.println(e.getMessage());
             }
         });

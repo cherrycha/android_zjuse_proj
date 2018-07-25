@@ -33,15 +33,17 @@ import okhttp3.Response;
 public class ItemInfoFragment extends Fragment implements View.OnClickListener {
 
     private ImageView image;
-    private TextView name,descript,price,location;
+    private TextView name, descript, price, location;
     private View rootView;
     private String token;
     private String item_name;
-    Button btn_buy_now;
-    JSONArray cards=new JSONArray();
 
-    private static int flag=0;
+    Button btn_buy_now;
+    JSONArray cards = new JSONArray();
+
+    private static int flag = 0;
     Bundle bundle = new Bundle();
+
     public ItemInfoFragment() {
         // Required empty public constructor
     }
@@ -51,25 +53,26 @@ public class ItemInfoFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView= inflater.inflate(R.layout.fragment_item_info, container, false);
+        rootView = inflater.inflate(R.layout.fragment_item_info, container, false);
 
         Integer itemNum = getArguments().getInt("ItemNum");
         token = getArguments().getString("token");
         bundle.putString("token", token);
 
-        btn_buy_now=rootView.findViewById(R.id.btn_buy_now);
+        btn_buy_now = rootView.findViewById(R.id.btn_buy_now);
         btn_buy_now.setOnClickListener(this);
-        name = (TextView)rootView.findViewById(R.id.item_name);
-        image = (ImageView)rootView.findViewById(R.id.item_image);
-        descript = (TextView)rootView.findViewById(R.id.item_intro);
+        name = (TextView) rootView.findViewById(R.id.item_name);
+        image = (ImageView) rootView.findViewById(R.id.item_image);
+        descript = (TextView) rootView.findViewById(R.id.item_intro);
         descript.setText("");
-        price = (TextView)rootView.findViewById(R.id.item_price);
+        price = (TextView) rootView.findViewById(R.id.item_price);
         //location= (TextView)rootView.findViewById(R.id.item_location);
-
+        flag = 0;
         HttpPost(itemNum);
 
         try {
-            Thread.sleep(2000);
+            while (flag == 0)
+                Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -92,29 +95,29 @@ public class ItemInfoFragment extends Fragment implements View.OnClickListener {
                 try {
                     String result = new String(response.body().string());
                     System.out.println(result);
-                    JSONObject responseobj=new JSONObject(result);
+                    JSONObject responseobj = new JSONObject(result);
                     JSONObject info = responseobj.getJSONObject("commodityInfo");//通过user字段获取其所包含的JSONObject对象
 
-                    String in_name = info.getString("commodityName");
-                    item_name=in_name;
-                    bundle.putString("item_name",in_name);
+                    item_name = info.getString("commodityName");
+
+                    bundle.putString("item_name", item_name);
                     String in_description = info.getString("description");
                     String in_location = info.getString("location");
                     Double in_price = info.getDouble("price");
                     String in_pic = info.getString("picture");
 
-                    name.setText(in_name);
+                    name.setText(item_name);
                     descript.setText(in_description);
                     //location.setText(in_location);
-                    price.setText("CNY ￥"+String.valueOf(in_price));
-                    if(in_pic.equals("apple")){
+                    price.setText("CNY ￥" + String.valueOf(in_price));
+                    if (in_pic.equals("apple")) {
                         image.setImageResource(R.drawable.apple);
-                    }else if(in_pic.equals("water")){
+                    } else if (in_pic.equals("water")) {
                         image.setImageResource(R.drawable.water);
-                    }else if(in_pic.equals("pen")){
+                    } else if (in_pic.equals("pen")) {
                         image.setImageResource(R.drawable.pen);
                     }
-
+                    flag = 1;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -126,6 +129,7 @@ public class ItemInfoFragment extends Fragment implements View.OnClickListener {
             }
         });
     }
+
     public void HttpPost_card() {
         String url = "http://120.79.132.224:9090/shopkeeper/bankcard-user/list";
         OkHttpClient client = new OkHttpClient();
@@ -137,22 +141,22 @@ public class ItemInfoFragment extends Fragment implements View.OnClickListener {
                 try {
                     String result = new String(response.body().string());
                     JSONObject responseobj = new JSONObject(result);
-                    if(result!="") {
+                    if (result != "") {
                         if (responseobj.getString("resultCode").equals("0000")) {
                             cards = responseobj.getJSONArray("bankcardList");//通过user字段获取其所包含的JSONObject对象
+                            flag = 1;
                         } else {
-                            Looper.prepare();
-                            Toast.makeText(getActivity(), "Fail to get userInfo", Toast.LENGTH_SHORT).show();
-                            Looper.loop();
+                            flag = 2;
                         }
-                        flag=1;
-                    }else{
-                        flag=2;
+
+                    } else {
+                        flag = 2;
                     }
                 } catch (Exception e) {
 
                 }
             }
+
             public void onFailure(Call call, IOException e) {
                 // 请求失败调用
                 System.out.println(e.getMessage());
@@ -162,13 +166,13 @@ public class ItemInfoFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
 //            case R.id.btn_add_to_cart:
 //                ItemAddedFragment itemAddedDialog = new ItemAddedFragment();
 //                itemAddedDialog.show(getFragmentManager(), "EditNameDialog");
 //                break;
             case R.id.btn_buy_now:
-                flag=0;
+                flag = 0;
                 HttpPost_card();
                 try {
                     while (flag == 0)
@@ -176,12 +180,13 @@ public class ItemInfoFragment extends Fragment implements View.OnClickListener {
                 } catch (Exception e) {
 
                 }
+
                 if (cards.length() > 0) {
                     SetAmountFragment itemAddedDialog = new SetAmountFragment();
                     try {
-                        String card_no=String.valueOf(cards.getJSONObject(0).getInt("relationshipId"));
+                        String card_no = String.valueOf(cards.getJSONObject(0).getInt("relationshipId"));
                         bundle.putString("card_no", card_no);
-                    }catch (Exception e){
+                    } catch (Exception e) {
 
                     }
                     itemAddedDialog.setArguments(bundle);

@@ -34,7 +34,7 @@ import org.json.JSONObject;
 
 public class ChangePasswordFragment extends DialogFragment implements View.OnClickListener {
 
-    private static int flag=0;
+    private static int flag = 0;
     String token;
     String password;
     String old_password;
@@ -54,49 +54,40 @@ public class ChangePasswordFragment extends DialogFragment implements View.OnCli
         view = inflater.inflate(R.layout.fragment_change_passwd, container, false);
 
         final SpannableStringBuilder style1 = new SpannableStringBuilder();
-        txt_old_password=view.findViewById(R.id.id_txt_old_password);
-        txt_password1 =view.findViewById(R.id.id_txt_confirm_password);
-        txt_password2 =view.findViewById(R.id.id_txt_new_password);
+        txt_old_password = view.findViewById(R.id.id_txt_old_password);
+        txt_password1 = view.findViewById(R.id.id_txt_confirm_password);
+        txt_password2 = view.findViewById(R.id.id_txt_new_password);
 
         //设置部分文字点击事件
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View view) {
-                switch (view.getId()){
+                switch (view.getId()) {
                     case R.id.id_txtbtn_confirm_change_passwd:
-                        if(txt_password1.getText().toString().equals(txt_password2.getText().toString())){
-                            password= txt_password2.getText().toString();
-                            old_password=txt_old_password.getText().toString();
-                            flag=0;
+                        if (txt_password1.getText().toString().equals(txt_password2.getText().toString())) {
+                            password = txt_password2.getText().toString();
+                            old_password = txt_old_password.getText().toString();
+                            flag = 0;
                             HttpPost();
                             try {
                                 while (flag == 0)
                                     Thread.sleep(100);
-                            }catch(Exception e){
+                            } catch (Exception e) {
 
                             }
 
-                            if(flag==1){//修改成功
-//                                Looper.prepare();
-//                                Toast.makeText(view.getContext(), "Password changed.", Toast.LENGTH_SHORT).show();
-//                                Looper.loop();
-                                try {
-                                        Thread.sleep(1000);
-                                }catch(Exception e) {
-                                }
+                            if (flag == 1) {//修改成功
+                                Toast.makeText(view.getContext(), "密码修改成功", Toast.LENGTH_SHORT).show();
 
-
-                                    dismiss();
-                            }else if(flag==2){//原密码错误
-//                                Looper.prepare();
-//                                Toast.makeText(getActivity(), "Wrong Old Password, Please Check", Toast.LENGTH_LONG).show();
-//                                Looper.loop();
+                                dismiss();
+                            } else if (flag == 2) {//原密码错误
+                                Toast.makeText(getActivity(), "原密码错误，请重新输入", Toast.LENGTH_LONG).show();
                             }
 
-                        }else{
-                            Looper.prepare();
-                            Toast.makeText(getActivity(), "Password doesn't match.", Toast.LENGTH_SHORT).show();
-                            Looper.loop();
+                        } else {
+
+                            Toast.makeText(getActivity(), "两次密码输入不一致，请重新输入", Toast.LENGTH_SHORT).show();
+
                         }
                         dismiss();
                 }
@@ -107,7 +98,7 @@ public class ChangePasswordFragment extends DialogFragment implements View.OnCli
         TextView continue_shopping = view.findViewById(R.id.id_txtbtn_confirm_change_passwd);
 
 
-        String txt_confirm=getActivity().getString(R.string.txt_confirm);
+        String txt_confirm = getActivity().getString(R.string.txt_confirm);
         style1.append(txt_confirm);
 
         style1.setSpan(clickableSpan, 0, txt_confirm.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -118,31 +109,31 @@ public class ChangePasswordFragment extends DialogFragment implements View.OnCli
         return view;
 
     }
+
     public void HttpPost() {
-        String url = "http://120.79.132.224:9090/shopkeeper/user/phoneNumber";
+        String url = "http://120.79.132.224:9090/shopkeeper/user/password";
 
         OkHttpClient client = new OkHttpClient();
         RequestBody formBody = new FormBody.Builder()
-                .add("oldPassword",old_password)
-                .add("newPassword",password)
+                .add("oldPassword", old_password)
+                .add("newPassword", password)
                 .build(); // 表单键值对
         token = getArguments().getString("token");
 
-        Request request = new Request.Builder().url(url).header("token",token).post(formBody).build(); // 请求
+        Request request = new Request.Builder().url(url).header("token", token).post(formBody).build(); // 请求
         client.newCall(request).enqueue(new Callback() { // 回调
             public void onResponse(Call call, Response response) throws IOException {
-                // 请求成功调用，该回调在子线程
                 try {
-
                     String result = new String(response.body().string());
                     JSONObject responseobj = new JSONObject(result);
-                    if(responseobj.getString("resultCode").equals("0000")) {
-                        flag=1;
-                    }else{
-                        flag=2;
+                    if (responseobj.getString("resultCode").equals("0000")) {
+                        flag = 1;
+                    } else {
+                        flag = 2;
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    flag=2;
                 }
             }
 
@@ -152,6 +143,7 @@ public class ChangePasswordFragment extends DialogFragment implements View.OnCli
             }
         });
     }
+
     @Override
     public void onClick(View view) {
 

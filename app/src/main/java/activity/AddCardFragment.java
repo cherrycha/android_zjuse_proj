@@ -91,9 +91,7 @@ public class AddCardFragment extends Fragment implements View.OnClickListener {
                 } else if (flag == 2) {
                     Toast.makeText(getActivity(), "Wrong card or password", Toast.LENGTH_SHORT).show();
                 } else if (flag == 1) {
-                    Toast.makeText(getActivity(), "Card Added, Please Refresh This Page", Toast.LENGTH_SHORT).show();
-//                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                    fragmentManager.popBackStack(null, 0);
+                    Toast.makeText(getActivity(), "Card Added", Toast.LENGTH_SHORT).show();
                     fragment=new CardFragment();
                 }
 

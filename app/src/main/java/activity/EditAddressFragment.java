@@ -3,6 +3,9 @@ package activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
@@ -15,7 +18,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,26 +27,25 @@ import cn.example.cherrycha.material_design.R;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okio.BufferedSink;
 
 
-public class SetAmountFragment extends DialogFragment implements View.OnClickListener {
+public class EditAddressFragment extends DialogFragment implements View.OnClickListener {
 
     private static int flag = 0;
     Bundle bundle=new Bundle();
     String token;
-    EditText txt_amount;
+    String phoneNumber;
+    String id;
+    String addressDescription;
+    EditText txt_address;
+    EditText txt_phone_no;
     View view;
-    Integer amount;
-    String card_no;
-    String name;
-    public SetAmountFragment() {
+
+    public EditAddressFragment() {
         // Required empty public constructor
     }
 
@@ -52,48 +53,58 @@ public class SetAmountFragment extends DialogFragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_set_amount, container, false);
+        view = inflater.inflate(R.layout.fragment_edit_address, container, false);
         token = getArguments().getString("token");
-        card_no = getArguments().getString("card_no");
         bundle.putString("token", token);
-        name=getArguments().getString("item_name");
-        txt_amount =view.findViewById(R.id.id_txt_amount);
-        final SpannableStringBuilder style1 = new SpannableStringBuilder();
+        txt_address=view.findViewById(R.id.id_txt_new_address);
+        txt_address.setText(getArguments().getString("address"));
 
+        txt_phone_no=view.findViewById(R.id.id_txt_new_phone);
+        txt_phone_no.setText(getArguments().getString("phone_no"));
+        final SpannableStringBuilder style1 = new SpannableStringBuilder();
 
         //设置部分文字点击事件
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View view) {
+                Fragment fragment=null;
                 switch (view.getId()) {
-                    case R.id.id_txt_confirm_payment:
-                        amount = Integer.valueOf(txt_amount.getText().toString());
+                    case R.id.id_txt_confirm:
+                        phoneNumber = txt_phone_no.getText().toString();
+                        addressDescription = txt_address.getText().toString();
+                        id=getArguments().getString("id");
                         flag = 0;
-
-//                        HttpPost();
-//                        try {
-//                            while (flag == 0)
-//                                Thread.sleep(100);
-//                        } catch (Exception e) {
-//
-//                        }
-
-                        flag=1;
-                        if (flag == 1) {//支付成功
-                                Toast.makeText(view.getContext(), "支付成功", Toast.LENGTH_SHORT).show();
-                            dismiss();
-                        } else if (flag == 2) {//额度不足
-
-                                Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_LONG).show();
+                        HttpPost();
+                        try {
+                            while (flag == 0)
+                                Thread.sleep(100);
+                        } catch (Exception e) {
 
                         }
+
+                        if (flag == 1) {//修改成功
+                            fragment = new AddressesFragment();
+                            Toast.makeText(getActivity(), "Edited Successfully", Toast.LENGTH_LONG).show();
+                            dismiss();
+                        } else if (flag == 2) {//原密码错误
+//                                Looper.prepare();
+//                                Toast.makeText(getActivity(), "Wrong Old Password, Please Check", Toast.LENGTH_LONG).show();
+//                                Looper.loop();
+                        }
                         dismiss();
+                }
+                if (fragment != null) {
+                    fragment.setArguments(bundle);
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.container_body, fragment);
+                    fragmentTransaction.commit();
                 }
 
             }
         };
 
-        TextView continue_shopping = view.findViewById(R.id.id_txt_confirm_payment);
+        TextView continue_shopping = view.findViewById(R.id.id_txt_confirm);
 
 
         String txt_confirm = getActivity().getString(R.string.txt_confirm);
@@ -109,28 +120,16 @@ public class SetAmountFragment extends DialogFragment implements View.OnClickLis
     }
 
     public void HttpPost() {
-        String url = "http://120.79.132.224:9090/shopkeeper/userorder";
-        JSONArray commodityList=new JSONArray();
-        JSONObject commodityInfo=new JSONObject();
-        try {
-            Integer no=2;
-//            switch("name"){
-//                case "":
-//            }
-            commodityInfo.put("commodityId", no.toString());
-            commodityInfo.put("count", amount);
-            commodityList.put(0,commodityInfo );
-        }catch(Exception e){
+        String url = "http://120.79.132.224:9090/shopkeeper/address";
 
-        }
         OkHttpClient client = new OkHttpClient();
         RequestBody formBody = new FormBody.Builder()
-                .add("type", "0")
-                .add("bankcardId", card_no)
+                .add("addressDescription", addressDescription)
+                .add("phoneNumber", phoneNumber)
+                .add("addressId", id)
                 .build(); // 表单键值对
 
-        Request request = new Request.Builder().url(url).header("token", token).post(formBody).build(); // 请求
-        System.out.println(commodityList.toString());
+        Request request = new Request.Builder().url(url).header("token", token).put(formBody).build(); // 请求
         client.newCall(request).enqueue(new Callback() { // 回调
             public void onResponse(Call call, Response response) throws IOException {
                 // 请求成功调用，该回调在子线程

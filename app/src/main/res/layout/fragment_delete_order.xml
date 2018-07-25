@@ -13,41 +13,20 @@
             android:orientation="vertical"
             android:padding="16dp">
             <TextView
-                android:id="@+id/id_dialog_title"
+                android:id="@+id/delete_order_title"
                 android:layout_width="200dp"
                 android:layout_height="24dp"
                 android:contentDescription="@string/app_name"
                 android:scaleType="center"
                 style="@style/Subheading"
                 android:textColor="@color/colorPrimaryText"
-                android:text="New Address"
+                android:text="Delete this order?"
                 />
 
-            <EditText
-                android:id="@+id/id_txt_new_address"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="4dp"
-                android:fontFamily="sans-serif"
-                android:hint="new address"
-                android:layout_below="@id/check_out_title"
-             />
-            <EditText
-                android:id="@+id/id_txt_new_phone"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:fontFamily="sans-serif"
-                android:hint="phone number"
-                android:layout_below="@id/id_txt_new_address"
-                />
+
             <TextView
                 android:id="@+id/id_txt_confirm"
-                android:layout_below="@id/id_txt_new_phone"
+                android:layout_below="@id/delete_order_title"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

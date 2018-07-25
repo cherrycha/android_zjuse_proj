@@ -82,12 +82,12 @@
                             android:layout_below="@id/ic_email"
                             android:src="@drawable/ic_action_nickname" />
 
-                        <ImageView
-                            android:id="@+id/ic_password"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/ic_action_password" />
+                        <!--<ImageView-->
+                            <!--android:id="@+id/ic_password"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="0dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:src="@drawable/ic_action_password" />-->
                     </LinearLayout>
 
                     <RelativeLayout
@@ -127,13 +127,13 @@
                             android:hint="@string/nick_name"
                             android:layout_below="@id/txt_email"/>
 
-                        <EditText
-                            android:id="@+id/txt_password"
-                            style="@style/Subheading"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/password"
-                            android:layout_below="@id/txt_nickname"/>
+                        <!--<EditText-->
+                            <!--android:id="@+id/txt_password"-->
+                            <!--style="@style/Subheading"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:hint="@string/password"-->
+                            <!--android:layout_below="@id/txt_nickname"/>-->
                     </RelativeLayout>
                 </LinearLayout>
 

@@ -23,6 +23,7 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 
+import model.MyRegex;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -34,12 +35,9 @@ import okhttp3.Response;
 
 public class EditProfileFragment extends Fragment implements View.OnClickListener {
     View rootView;
-    EditText et_name;
-    EditText et_email;
-    EditText et_nickname;
-    EditText et_phone_no;
-    EditText et_password;
-    String token;
+    EditText et_email, et_nickname, et_phone_no;
+    String nickname, email, phoneNumber, token;
+    Bundle bundle = new Bundle();
     private static int flag = 0;
 
     public EditProfileFragment() {
@@ -59,6 +57,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         rootView = inflater.inflate(R.layout.fragment_edit_profile, container, false);
         rootView.findViewById(R.id.save_button).setOnClickListener(this);
         String[] infos = getActivity().getResources().getStringArray(R.array.info_labels);
+        token = getArguments().getString("token");
         if (getArguments() != null) {
             try {
                 for (int i = 0; i < infos.length; i++) {
@@ -80,11 +79,11 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
                             et_nickname.setText(getArguments().getString(infos[i]));
                             break;
                         case 4:
-                            et_password = rootView.findViewById(R.id.txt_password);
-                            et_password.setText(getArguments().getString(infos[i]));
+//                            et_password = rootView.findViewById(R.id.txt_password);
+//                            et_password.setText(getArguments().getString(infos[i]));
+//                            break;
+                        default:
                             break;
-                        case 5:
-                            token = getArguments().getString(infos[i]);
                     }
                 }
             } catch (NullPointerException e) {
@@ -99,39 +98,39 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View view) {
-        Bundle bundle = new Bundle();
-        Fragment fragment = null;
         switch (view.getId()) {
             case R.id.save_button:
-                HttpPost();
-                try {
-                    while (flag == 0)
-                        Thread.sleep(100);
-                } catch (Exception e) {
+                nickname = et_nickname.getText().toString();
+                phoneNumber = et_phone_no.getText().toString();
+                email = et_email.getText().toString();
+                if (MyRegex.isValidEmail(email) && MyRegex.isValidPhoneNumber(phoneNumber)) {
+                    flag = 0;
+                    HttpPost();
+                    try {
+                        while (flag == 0)
+                            Thread.sleep(100);
+                    } catch (Exception e) {
 
+                    }
+                    Toast.makeText(getActivity(), "done~", Toast.LENGTH_SHORT).show();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentManager.popBackStack(null, 0);
+                } else {
+                    if (!MyRegex.isValidPhoneNumber(phoneNumber)) {
+                        Toast.makeText(getActivity(), "Invalid Phone Number, Please Check!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), "Invalid Email Address, Please Check!", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.popBackStack(null, 0);
                 break;
         }
-
-//        if (fragment != null) {
-//            fragment.setArguments(bundle);
-//            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//            fragmentTransaction.replace(R.id.container_body, fragment);
-//            fragmentTransaction.commit();
-//        }
     }
 
     public void HttpPost() {
         String url = "http://120.79.132.224:9090/shopkeeper/user/info";
 
         OkHttpClient client = new OkHttpClient();
-        System.out.println(token);
-        String nickname = et_nickname.getText().toString();
-        String phoneNumber = et_phone_no.getText().toString();
-        String email = et_email.getText().toString();
+
         RequestBody formBody = new FormBody.Builder()
                 .add("nickname", nickname)
                 .add("phoneNumber", phoneNumber)
@@ -142,10 +141,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         client.newCall(request).enqueue(new Callback() { // 回调
 
             public void onResponse(Call call, Response response) throws IOException {
-                // 请求成功调用，该回调在子线程
-//                Looper.prepare();
-//                Toast.makeText(getActivity(), "done~",Toast.LENGTH_SHORT).show();
-//                Looper.loop();
+
                 flag = 1;
             }
 
